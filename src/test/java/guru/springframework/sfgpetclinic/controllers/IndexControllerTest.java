@@ -5,7 +5,7 @@ import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertTrue;
+import static org.junit.jupiter.api.Assertions.assertThrows;
 
 class IndexControllerTest {
 
@@ -16,18 +16,17 @@ class IndexControllerTest {
         controller = new IndexController();
     }
 
-    @DisplayName("Test Proper View Name is returned for index page")
     @Test
+    @DisplayName("Test Proper View Name is returned for index page")
     void index() {
         assertEquals("index", controller.index(), "Wrong View returned");
     }
 
-    @DisplayName("Test exception")
     @Test
-    void oupsHandler() {
-        assertTrue("notimplemented".equals(controller.oupsHandler()), () ->
-                "this is some expensive " +
-                "Message to build " +
-                "for my test");
+    @DisplayName("Test exception")
+    void oopsHandler() {
+        assertThrows(ValueNotFoundException.class, () -> {
+            controller.oopsHandler();
+        });
     }
 }
